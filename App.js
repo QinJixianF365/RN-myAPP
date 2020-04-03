@@ -2,20 +2,33 @@ import React,{useState,useEffect} from 'react';
 import {StyleSheet,View,Text, Image } from 'react-native';
 import {Router, Scene, Tabs, Drawer, Lightbox, Modal } from 'react-native-router-flux';
 import { Grid, Icon } from '@ant-design/react-native';
+import SplashScreen from 'react-native-splash-screen';
 import Thefirstpage from './components/Thefirstpage';
 import Person from './components/Person';
 import Wannabuy from './components/Wannabuy';
-
+import Login from './src/common/Login';
 import MsgDetail from './components/MsgDetail';
 import MyRelease from './components/MyRelease';
 import Chips from './Chips';
-import Mylist from './components/Mylist';
+
 
 const styles = StyleSheet.create({
   
 });
+
+const rootUrl ='https://www.fastmock.site/mock/9cb4b893bd42af9d9e23b5c08d033230/api';
+
 const App = () => {
     // 实现 Tabs
+    let now = 0;
+    
+    useEffect(()=>{
+        SplashScreen.hide();
+        // fetch(rootUrl+'/topics?limit=5')
+        //     .then(res=>res.json())
+        //     .then(res=>console.log(JSON.stringify(res)))
+    },[])
+
     return (
         
         <Router>
@@ -117,9 +130,10 @@ const App = () => {
                         </Scene>
                     {/*</Drawer>**/}
                 </Lightbox>
+                <Scene initial={true} key="login" component={Login}></Scene>
             </Modal>
         </Router>
-    );b 
+    ); 
 };
 
 

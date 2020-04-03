@@ -187,6 +187,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-splash-screen')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-image-picker')
     implementation project(':react-native-webview')
@@ -194,6 +195,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     compile "com.android.support:appcompat-v7:27.0.2"
+    compile project(':react-native-splash-screen')
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

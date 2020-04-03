@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import {StyleSheet,View,Text, Image } from 'react-native';
-import {Router, Overlay, Scene, Tabs, Drawer, Lightbox, Modal } from 'react-native-router-flux';
+import {Router, Overlay, Scene, Tabs, Drawer, Lightbox, Modal, Actions } from 'react-native-router-flux';
 import { Grid, Icon } from '@ant-design/react-native';
 import { MessageBar, MessageBarManager } from 'react-native-message-bar';
 import Doc from './components/Doc';
@@ -8,11 +8,12 @@ import Msg from './components/Msg';
 import MsgDetail from './components/MsgDetail';
 import Mybox from './components/Mybox';
 import ShowMyName from './components/ShowMyName'
-import Login from './components/Login'
+import Login from './src/Login'
 import Home from './components/Home'
 import Message from './components/Message'
 import Mylist from './components/Mylist'
 import LocalPage from './components/LocalPage'
+import SplashScreen from 'react-native-splash-screen';
 
 // 图标安装完之后要link,link成功之后卸载App,再重新 npm run android
 // 重装完以后,App停止运行的,卸载除了 React-native-router-flux之外的没用的包
@@ -21,10 +22,32 @@ import LocalPage from './components/LocalPage'
 // yarn remove react-native-router-flux
 // yarn add react-native-router-flux@4.0.6
 
+// App logo : 将myApp\android\app\src\main\res下的文件夹下图片换成自己的 
+// 启动画面 ：react-native-splash-screen
+// 如果第一次安装，一般来说都有一个引导页（普通轮播图），注意本地存储记录下状态
+// 看功能，是否需要先登录，如果需要先登录，登录完记录状态（用户信息）
+// 再次进入的时候，也要从本地判断是否登录过
+
+// react native中本地存储是异步的
+// 
+
 const styles = StyleSheet.create({
   
 });
+
+const rootUrl ='https://www.fastmock.site/mock/9cb4b893bd42af9d9e23b5c08d033230/api';
 const App = () => {
+
+    let now = 0;
+    
+    useEffect(()=>{
+        SplashScreen.hide();
+        fetch(rootUrl+'/topics')
+            .then(res=>res.json())
+            .then(res=>console.log(JSON.stringify(res)))
+    },[])
+    
+  
     // 实现 Tabs
     return (
         <Router>
